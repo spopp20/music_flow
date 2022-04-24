@@ -18,45 +18,53 @@ Build a React full-stack application with Node.js on the front and back-end serv
 * docker-compose version 1.29.2
 
 
-## Prisma DB Schema
-
-Next steps:
-
-1. Set the DATABASE_URL in the .env file to point to your existing database. If your database has no tables yet, read https://pris.ly/d/getting-started
-2. Set the provider of the datasource block in schema.prisma to match your database: postgresql, mysql, sqlite, sqlserver or mongodb.
-3. Run prisma db pull to turn your database schema into a Prisma schema.
-4. Run prisma generate to generate the Prisma Client. You can then start querying your database.
-```
-
-
-### View Client App
-
-```
-docker-compose up
-```
-Open the link http://localhost:3000
-
-### View Database Records
-
-```
-
-
-## client
+## client folder
 Front-end application created using create-react-app
 
-# server
-Backend API service
+## server folder
+Backend GraphQL API service
 
-# db
+## db folder
 Database directory with sample.sql used to initialize the database
 
-## Startup
+## Application Startup
 
 ```
 docker-compose up
 ```
 
-## Commands
+## Prisma DB Schema
+
+Next steps from the server folder
+
+```
+1. Set the DATABASE_URL in the .env file to point to your existing database. If your database has no tables yet, read https://pris.ly/d/getting-started
+2. Set the provider of the datasource block in schema.prisma to match your database: postgresql, mysql, sqlite, sqlserver or mongodb.
+3. Run `npx prisma db pull` to turn your database schema into a Prisma schema.
+4. Run `prisma generate` to generate the Prisma Client. You can then start queryinnpx g your database.
+```
+
+
+## View Client App
+
+```
+docker-compose up
+```
+Open http://localhost:3000
+
+## View Database Records
+
+```
+npx prisma studio
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Prisma Studio is up on http://localhost:5555
+```
+
+Open http://localhost:5555
+
+## Prisma Commands
 
             init   Setup Prisma for your app
       introspect   Get the datamodel of your database
@@ -64,28 +72,27 @@ docker-compose up
           studio   Open Prisma Studio
           format   Format your schema
          migrate   Migrate your database
-              db   Manage your database schema and lifecycle (Preview)
+              db   Manage your database schema and lifecycle
 
-## Flags
 
-     --preview-feature   Run Preview Prisma commands
+### Prisma Example Commands
 
-## Examples
-
+```
   Setup a new Prisma project
   $ npx prisma init
 
   Introspect an existing database
-  $ npx prisma db pull
+  $ npx prisma db pull - updates prisma/schema.prisma
 
-  Generate artifacts (e.g. Prisma Client)
+  Generate Prisma Client
   $ npx prisma generate
 
   Browse your data
   $ npx prisma studio
 
-  Create migrations from your Prisma schema, apply them to the database, generate artifacts (e.g. Prisma Client)
+  Create migrations from your Prisma schema, apply them to the database, generate Prisma Client
   $ npx prisma migrate dev
 
   Push the Prisma schema state to the database
   $ npx prisma db push
+```
