@@ -1,0 +1,19 @@
+{
+  "name": "music-service",
+  "version": "0.0.1",
+  "description": "GraphQL service supporting the music database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "spopp",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^3.12.0",
+    "apollo-server": "^3.6.7",
+    "graphql": "^16.3.0"
+  },
+  "devDependencies": {
+    "prisma": "^3.12.0"
+  }
+}

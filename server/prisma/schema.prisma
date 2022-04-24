@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id            Int         @id @default(autoincrement())
+  name          String      @default("") @db.VarChar(128)
+  active        Int         @default(1)
+  description   String?     @db.Text
+  venue         String?     @db.Text
+  location      String?     @db.Text
+  notes         String?     @db.Text
+  telephone     String?     @db.Text
+  startDateTime DateTime    @default(now()) @db.Timestamp(0)
+  endDateTime   DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime    @default(now()) @db.Timestamp(0)
+  createdAt     DateTime    @default(now()) @db.Timestamp(0)
+  EventSong     EventSong[]
+}
+
+model EventSong {
+  id          Int      @id @default(autoincrement())
+  eventId     Int?
+  songId      Int?
+  published   Int      @default(0)
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime @default(now()) @db.Timestamp(0)
+  Event       Event?   @relation(fields: [eventId], references: [id], map: "EventSong_ibfk_1")
+  Song        Song?    @relation(fields: [songId], references: [id], map: "EventSong_ibfk_2")
+
+  @@index([eventId], map: "eventId")
+  @@index([songId], map: "songId")
+}
+
+model Instrument {
+  id             Int              @id @default(autoincrement())
+  name           String           @default("") @db.VarChar(128)
+  active         Int              @default(1)
+  description    String?          @db.Text
+  createdAt      DateTime         @default(now()) @db.Timestamp(0)
+  updatedAt      DateTime         @default(now()) @db.Timestamp(0)
+  InstrumentSong InstrumentSong[]
+}
+
+model InstrumentSong {
+  id           Int         @id @default(autoincrement())
+  notes        String?     @db.VarChar(128)
+  words        String?     @db.Text
+  mimeType     String?     @db.VarChar(128)
+  file         String?     @db.Text
+  createdAt    DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt    DateTime    @default(now()) @db.Timestamp(0)
+  instrumentId Int?
+  songId       Int?
+  Instrument   Instrument? @relation(fields: [instrumentId], references: [id], map: "InstrumentSong_ibfk_1")
+  Song         Song?       @relation(fields: [songId], references: [id], map: "InstrumentSong_ibfk_2")
+
+  @@index([instrumentId], map: "instrumentId")
+  @@index([songId], map: "songId")
+}
+
+model Session {
+  id                 Int       @id @default(autoincrement())
+  createdAt          DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt          DateTime  @default(now()) @db.Timestamp(0)
+  expiresAt          DateTime?
+  handle             String    @unique(map: "Session.handle_unique")
+  hashedSessionToken String?
+  antiCSRFToken      String?
+  publicData         String?
+  privateData        String?
+  userId             Int?
+  User               User?     @relation(fields: [userId], references: [id], map: "Session_ibfk_1")
+
+  @@index([userId], map: "userId")
+}
+
+model Song {
+  id             Int              @id @default(autoincrement())
+  title          String           @default("") @db.VarChar(128)
+  active         Int              @default(1)
+  alias          String?          @db.VarChar(128)
+  startKey       String?          @db.VarChar(15)
+  tempoCd        Int?
+  startWords     String?          @db.Text
+  arrangement    String?          @db.Text
+  createdAt      DateTime         @default(now()) @db.Timestamp(0)
+  updatedAt      DateTime         @default(now()) @db.Timestamp(0)
+  tags           String?
+  EventSong      EventSong[]
+  InstrumentSong InstrumentSong[]
+}
+
+model Token {
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime   @default(now()) @db.Timestamp(0)
+  hashedToken String
+  type        Token_type
+  expiresAt   DateTime
+  sentTo      String
+  userId      Int
+  User        User       @relation(fields: [userId], references: [id], onDelete: NoAction, map: "Token_ibfk_1")
+
+  @@unique([hashedToken, type], map: "Token.hashedToken_type_unique")
+  @@index([userId], map: "userId")
+}
+
+model User {
+  id             Int       @id @default(autoincrement())
+  createdAt      DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt      DateTime  @default(now()) @db.Timestamp(0)
+  email          String    @unique(map: "User.email_unique")
+  name           String?
+  active         Int       @default(1)
+  role           User_role @default(USER)
+  hashedPassword String?
+  Session        Session[]
+  Token          Token[]
+
+  @@unique([email, active], map: "User.email_active_unique")
+}
+
+enum Token_type {
+  RESET_PASSWORD
+}
+
+enum User_role {
+  USER
+  EDITOR
+  LEADER
+  ADMIN
+}

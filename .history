@@ -1,0 +1,126 @@
+# History of commands
+
+## nvm install
+Node version manager install - if nodejs is not currently installed on your machine
+
+* go to https://github.com/nvm-sh/nvm
+* curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+* nvm install --lts
+* node --version
+** v16.14.2
+
+## Docker
+Docker was already installed
+
+* docker --version
+** Docker version 20.10.12, build e91ed5707e
+* docker-compose --version
+** docker-compose version 1.29.2
+
+
+## Commands
+mkdir music_flow
+cd music_flow
+git init
+touch README.md
+touch docker-compose.yaml
+touch .gitignore
+
+mkdir client
+cd client
+touch Dockerfile
+touch .dockerignore
+npx create-react-app music-flow
+cp -r music-flow/* .
+rm -rf music-flow
+# rm -rf .git  # Was not needed for some reason
+
+
+
+
+## Database
+
+mkdir db
+
+I took the schema from a Maria database using mysqldump
+
+```
+cd db
+
+mysqldump -u music -p music_program > sample.sql
+```
+
+
+mkdir server
+cd server
+touch Dockerfile
+touch .dockerignore
+npm init
+npm install apollo-server graphql
+
+npm install prisma -D
+
+
+## Create the prisma dirctory and schema
+
+```
+npx prisma init
+
+✔ Your Prisma schema was created at prisma/schema.prisma
+  You can now open it in your favorite editor.
+
+Next steps:
+1. Set the DATABASE_URL in the .env file to point to your existing database. If your database has no tables yet, read https://pris.ly/d/getting-started
+2. Set the provider of the datasource block in schema.prisma to match your database: postgresql, mysql, sqlite, sqlserver or mongodb.
+3. Run prisma db pull to turn your database schema into a Prisma schema.
+4. Run prisma generate to generate the Prisma Client. You can then start querying your database.
+```
+
+### Pull down the db schema
+
+```
+docker-compose up
+
+# In another terminal pull down the inital db schema
+npx prisma db pull
+
+# Generate the prisma client
+npx prisma generate
+
+✔ Installed the @prisma/client and prisma packages in your project
+
+✔ Generated Prisma Client (3.12.0 | library) to ./node_modules/@prisma/client in 186ms
+You can now start using Prisma Client in your code. Reference: https://pris.ly/d/client
+```
+
+```
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+```
+
+### View the database
+Use prisma studio to view the database from the server folder
+
+```
+npx prisma studio
+```
+
+Opens prisma studio in a browser at http://localhost:5555/
+
+## Create Layout Components
+From the client/src directory
+
+mkdir components
+mkdir components/Layout
+cd components/Layout
+touch Layout.js
+touch Header.js
+touch Footer.js
+
+
+# Create the music_flow github site
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:spopp20/music_flow.git
+git push -u origin main
