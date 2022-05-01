@@ -1,7 +1,16 @@
 {
   "name": "music-flow",
   "version": "0.1.0",
+  "description": "Music application for score management",
   "private": true,
+  "author": "spopp",
+  "license": "ISC",
+  "keywords": [
+    "Music",
+    "Mariadb",
+    "Docker",
+    "Node.js"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",

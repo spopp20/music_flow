@@ -1,6 +1,45 @@
-# Getting Started with Create React App
+# Music Flow
+An application for organizing musical scores and creating event musical score lists
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Application Status
+This application has just been started and is not ready to be considered for use.
+
+### Client
+The client web application written using react.js can be displayed but has only begun development.
+
+### Server
+The backend GraphQL API is being developed first and currently runs but has no real schema definition.
+
+
+## Usage
+
+1. Install client dependencies
+
+```
+cd client
+npm install
+cd ..
+```
+
+2. Install server dependencies
+
+```
+cd server
+cp .env.example .env
+npm install
+cd ..
+```
+
+
+```
+docker-compose up
+```
+
+Open the app at [http://localhost:3000](http://localhost:3000)
+
+Open GraphQL app at [http://localhost:4000](http://localhost:4000)
+
+
 
 ## Available Scripts
 

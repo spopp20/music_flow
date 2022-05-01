@@ -2,8 +2,8 @@
 
 The start of a Docker supported client server database application
 
-* Client - created with npx create-react-app
-* Server - using apollo-server
+* Client - created with npx create-react-app (port 3000)
+* Server - using apollo-server (port 4000)
 
 ## Goal
 
@@ -40,10 +40,24 @@ Next steps from the server folder
 ```
 1. Set the DATABASE_URL in the .env file to point to your existing database. If your database has no tables yet, read https://pris.ly/d/getting-started
 2. Set the provider of the datasource block in schema.prisma to match your database: postgresql, mysql, sqlite, sqlserver or mongodb.
-3. Run `npx prisma db pull` to turn your database schema into a Prisma schema.
-4. Run `prisma generate` to generate the Prisma Client. You can then start queryinnpx g your database.
+
 ```
 
+### Start from an Existing Database Schema First
+Our project started with an existing schema loaded from db/sample.sql
+
+```
+3. Run `npx prisma db pull` to turn your database schema into a Prisma schema.
+4. Run `npx prisma generate` to generate the Prisma Client. You can then start querying your database.
+```
+
+### To Change the Database Schema (Optional)
+To change the Database schema or start from an edited prisma.schema file use the migrate command.
+This will generate the schema and store the changes (migration) in the database and generate the Prisma Client
+
+```
+run `npx prisma migrate dev --name "(reason for the change)"`
+```
 
 ## View Client App
 
@@ -54,7 +68,12 @@ Open http://localhost:3000
 
 ## View Database Records
 
+The GraphQL server is running at http://localhost:4000
+
+or
+
 ```
+cd server
 npx prisma studio
 
 Environment variables loaded from .env

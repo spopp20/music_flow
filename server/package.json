@@ -1,19 +1,53 @@
 {
   "name": "music-service",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "GraphQL service supporting the music database",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "spopp",
   "license": "ISC",
+  "main": "server.js",
+  "keywords": [
+    "Apollo",
+    "Graphql",
+    "Backend",
+    "Prisma",
+    "Mariadb",
+    "Docker",
+    "Node.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --transpile-only --no-notify --exit-child src/server.ts",
+    "generate": "ts-node --transpile-only src/schema",
+    "prettier": "prettier 'src/**/*.ts' --write",
+    "migrate:deploy": "npx prisma migrate deploy",
+    "build": "npx prisma generate && npm run generate && tsc",
+    "start": "node dist/src/server.js"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "dependencies": {
-    "@prisma/client": "^3.12.0",
+    "@prisma/client": "^3.13.0",
     "apollo-server": "^3.6.7",
-    "graphql": "^16.3.0"
+    "apollo-server-core": "^3.6.7",
+    "bcryptjs": "^2.4.3",
+    "graphql": "^16.3.0",
+    "graphql-middleware": "^6.1.25",
+    "graphql-scalars": "^1.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "nexus": "^1.3.0",
+    "nexus-prisma": "^0.35.0"
   },
   "devDependencies": {
-    "prisma": "^3.12.0"
+    "@tsconfig/node16": "^1.0.2",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^8.5.8",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2",
+    "prisma": "^3.13.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.4"
   }
 }
