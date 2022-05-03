@@ -35,11 +35,23 @@ type Instrument {
 }
 
 type Mutation {
+  login(email: String!, password: String!): AuthPayload!
   signup(email: String!, name: String!, password: String!): AuthPayload!
 }
 
 type Query {
   ok: Boolean!
+}
+
+type Session {
+  createdAt: DateTime!
+  expiresAt: DateTime!
+  hashedSessionToken: String
+  id: Int!
+  privateData: String
+  publicData: String
+  updatedAt: DateTime!
+  userId: Int
 }
 
 type Song {
@@ -67,11 +79,11 @@ type Token {
 }
 
 type User {
-  active: Boolean!
+  active: Int
   createdAt: DateTime!
   email: String!
-  hashedPassword: String
   id: Int!
   name: String!
+  password: String
   updatedAt: DateTime!
 }

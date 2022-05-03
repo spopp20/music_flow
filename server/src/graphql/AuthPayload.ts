@@ -3,31 +3,15 @@ import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import { APP_SECRET } from "../utils/auth";
 
+export interface AuthTokenPayload {
+    userId: number;
+}
 
-export const AuthMutation = extendType({
-    type: "Mutation",
-    definition(t) {
-        t.nonNull.field("signup", {
-            type: "AuthPayload",  
-            args: {  
-                email: nonNull(stringArg()), 
-                password: nonNull(stringArg()),
-                name: nonNull(stringArg()),
-            },
-            async resolve(parent, args, context) {
-                const { email, name } = args;
-                const hashedPassword = await bcrypt.hash(args.password, 10);
-                const user = await context.prisma.user.create({
-                    data: { email, name, hashedPassword },
-                });
+export function decodeAuthHeader(authHeader: String): AuthTokenPayload {
+    const token = authHeader.replace("Bearer ", "");
 
-                const token = jwt.sign({ userId: user.id }, APP_SECRET);
-
-                return {
-                    token,
-                    user,
-                };
-            },
-        });
-    },
-});
+    if (!token) {
+        throw new Error("No token found");
+    }
+    return jwt.verify(token, APP_SECRET) as AuthTokenPayload;
+}

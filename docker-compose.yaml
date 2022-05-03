@@ -22,6 +22,17 @@ services:
     volumes:
       - ./db/sample.sql:/docker-entrypoint-initdb.d/sample.sql
 
+  mysql-seeder:
+    image: mysql
+    container_name: seeder_container
+    depends_on:
+      - mysql-db
+    volumes:
+      - ./db/seed.sql:/seed.sql
+    links:
+      - mysql-db
+    entrypoint: [ "bash", "-c", "sleep 10 && mysql --user=root --password=root --host=mysql_container --port=3306 music_program < /seed.sql && exit"] 
+
   server:
     build: ./server
     container_name: server_container

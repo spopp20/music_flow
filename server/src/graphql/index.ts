@@ -1,5 +1,5 @@
 export * from "./Auth";
-export * from "./AuthPayload";
+//export * from "./AuthPayload";
 export * from "./Event";
 //export * from "./EventSong";
 export * from "./Instrument";

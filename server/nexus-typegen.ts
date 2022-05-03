@@ -70,6 +70,16 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Query: {};
+  Session: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    expiresAt: NexusGenScalars['DateTime']; // DateTime!
+    hashedSessionToken?: string | null; // String
+    id: number; // Int!
+    privateData?: string | null; // String
+    publicData?: string | null; // String
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId?: number | null; // Int
+  }
   Song: { // root type
     active: boolean; // Boolean!
     alias?: string | null; // String
@@ -93,12 +103,12 @@ export interface NexusGenObjects {
     userId: number; // Int!
   }
   User: { // root type
-    active: boolean; // Boolean!
+    active?: number | null; // Int
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
-    hashedPassword?: string | null; // String
     id: number; // Int!
     name: string; // String!
+    password?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
@@ -139,10 +149,21 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Mutation: { // field return type
+    login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
+  }
+  Session: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    expiresAt: NexusGenScalars['DateTime']; // DateTime!
+    hashedSessionToken: string | null; // String
+    id: number; // Int!
+    privateData: string | null; // String
+    publicData: string | null; // String
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: number | null; // Int
   }
   Song: { // field return type
     active: boolean; // Boolean!
@@ -167,12 +188,12 @@ export interface NexusGenFieldTypes {
     userId: number; // Int!
   }
   User: { // field return type
-    active: boolean; // Boolean!
+    active: number | null; // Int
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
-    hashedPassword: string | null; // String
     id: number; // Int!
     name: string; // String!
+    password: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
@@ -203,10 +224,21 @@ export interface NexusGenFieldTypeNames {
     updatedAt: 'DateTime'
   }
   Mutation: { // field return type name
+    login: 'AuthPayload'
     signup: 'AuthPayload'
   }
   Query: { // field return type name
     ok: 'Boolean'
+  }
+  Session: { // field return type name
+    createdAt: 'DateTime'
+    expiresAt: 'DateTime'
+    hashedSessionToken: 'String'
+    id: 'Int'
+    privateData: 'String'
+    publicData: 'String'
+    updatedAt: 'DateTime'
+    userId: 'Int'
   }
   Song: { // field return type name
     active: 'Boolean'
@@ -231,18 +263,22 @@ export interface NexusGenFieldTypeNames {
     userId: 'Int'
   }
   User: { // field return type name
-    active: 'Boolean'
+    active: 'Int'
     createdAt: 'DateTime'
     email: 'String'
-    hashedPassword: 'String'
     id: 'Int'
     name: 'String'
+    password: 'String'
     updatedAt: 'DateTime'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
+    login: { // args
+      email: string; // String!
+      password: string; // String!
+    }
     signup: { // args
       email: string; // String!
       name: string; // String!

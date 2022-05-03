@@ -6,9 +6,9 @@ export const User = objectType({
         t.nonNull.int("id");
         t.nonNull.string("name");
         t.nonNull.string("email");
-        t.nonNull.boolean("active");
         t.nonNull.dateTime("createdAt");
         t.nonNull.dateTime("updatedAt");
-        t.nullable.string("hashedPassword");
+        t.nullable.string("password");
+        t.nullable.int("active");
     },
 });

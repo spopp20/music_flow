@@ -14,7 +14,7 @@ generator nexusPrisma {
 model Event {
   id            Int         @id @default(autoincrement())
   name          String      @default("") @db.VarChar(128)
-  active        Int         @default(1)
+  active        Int?        @default(1) @db.TinyInt
   description   String?     @db.Text
   venue         String?     @db.Text
   location      String?     @db.Text
@@ -45,7 +45,7 @@ model EventSong {
 model Instrument {
   id             Int              @id @default(autoincrement())
   name           String           @default("") @db.VarChar(128)
-  active         Int              @default(1)
+  active         Int?             @default(1) @db.TinyInt
   description    String?          @db.Text
   createdAt      DateTime         @default(now()) @db.Timestamp(0)
   updatedAt      DateTime         @default(now()) @db.Timestamp(0)
@@ -88,10 +88,10 @@ model Session {
 model Song {
   id             Int              @id @default(autoincrement())
   title          String           @default("") @db.VarChar(128)
-  active         Int              @default(1)
+  active         Int?             @default(1) @db.TinyInt
   alias          String?          @db.VarChar(128)
   startKey       String?          @db.VarChar(15)
-  tempoCd        Int?
+  tempoCd        Int?             @db.TinyInt
   startWords     String?          @db.Text
   arrangement    String?          @db.Text
   createdAt      DateTime         @default(now()) @db.Timestamp(0)
@@ -122,13 +122,21 @@ model User {
   updatedAt      DateTime  @default(now()) @db.Timestamp(0)
   email          String    @unique(map: "User.email_unique")
   name           String?
-  active         Int       @default(1)
+  active         Int?      @default(1) @db.TinyInt
   role           User_role @default(USER)
-  hashedPassword String?
+  password       String
+  profile        Profile?
   Session        Session[]
   Token          Token[]
 
   @@unique([email, active], map: "User.email_active_unique")
+}
+
+model Profile {
+  id     Int    @id @default(autoincrement())
+  bio    String
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int
 }
 
 enum Token_type {
