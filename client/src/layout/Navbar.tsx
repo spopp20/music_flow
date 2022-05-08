@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+//import { ReactNode } from 'react';
+import { Link as RouteLink } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -15,10 +16,11 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Text,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
-
-const Links = ['Dashboard', 'Projects', 'Team'];
+/*
+const Links = ['Home', 'Music', 'Selection'];
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -29,8 +31,16 @@ const NavLink = ({ children }: { children: ReactNode }) => (
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
-    href={'#'}>
+    >
     {children}
+  </Link>
+);
+*/
+
+type NavLinkProps = { text: string };
+const NavLink = ({ text }: NavLinkProps) => (
+  <Link>
+    <Text fontSize="xl">{text}</Text>
   </Link>
 );
 
@@ -54,9 +64,15 @@ export const Navbar = () => {
               as={'nav'}
               spacing={4}
               display={{ base: 'none', md: 'flex' }}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
+              <RouteLink to="/">
+                <NavLink text="Home" />
+              </RouteLink>
+              <RouteLink to="/music">
+                <NavLink text="Music" />
+              </RouteLink>
+              <RouteLink to="/selection">
+                <NavLink text="Selection" />
+              </RouteLink>
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
@@ -83,10 +99,17 @@ export const Navbar = () => {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
+                <MenuItem>
+                  <RouteLink to="/userprofile">
+                    <NavLink text="Profile" />
+                  </RouteLink>
+                </MenuItem>
                 <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem>
+                  <RouteLink to="/signout">
+                    <NavLink text="Sign out" />
+                    </RouteLink>
+                </MenuItem>
               </MenuList>
             </Menu>
           </Flex>
@@ -95,9 +118,15 @@ export const Navbar = () => {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
+              <RouteLink to="/">
+                <NavLink text="Home" />
+              </RouteLink>
+              <RouteLink to="/music">
+                <NavLink text="Music" />
+              </RouteLink>
+              <RouteLink to="/selection">
+                <NavLink text="Selection" />
+              </RouteLink>
             </Stack>
           </Box>
         ) : null}
