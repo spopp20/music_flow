@@ -17,8 +17,5 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
-  "paths": {
-    "@components/*": "components/*",
-    "@pages/*": "pages/*"
-  }
+  "paths": {}
 }

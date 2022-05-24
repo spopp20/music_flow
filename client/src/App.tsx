@@ -1,38 +1,58 @@
-import {
-  ChakraProvider,
-  theme
- } from "@chakra-ui/react"
+import * as React from 'react';
+import { ChakraProvider, theme } from '@chakra-ui/react';
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { DefaultLayout } from "./layout"
-import { HomePage } from "./pages"
-import { AboutPage } from "./pages"
-import { MusicPage } from "./pages";
-import { SelectionPage } from "./pages";
-import { LoginPage } from "./pages"
-import { SignupPage } from "./pages"
-import { ForgotPasswordPage } from "./pages";
-import { ResetPasswordPage } from "./pages";
-import { UserProfilePage } from "./pages"
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { DefaultLayout } from './layout';
+import { HomePage } from './pages';
+import { AboutPage } from './pages';
+import { MusicPage } from './pages';
+import { SelectionPage } from './pages';
+import { LoginPage } from './pages';
+import { SignupPage } from './pages';
+import { ForgotPasswordPage } from './pages';
+import { ResetPasswordPage } from './pages';
+import { UserProfilePage } from './pages';
+import { ProtectedRoute } from './routes';
 
-
-export const App = () => (  
-  <ChakraProvider theme={theme}>
+export const App = () => (
+  <React.StrictMode>
+    <ChakraProvider theme={theme}>
       <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<DefaultLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/music" element={<MusicPage/>} / >
-              <Route path="/selection" element={<SelectionPage />} />
-              <Route path="/userprofile" element={<UserProfilePage />} />
-            </Route>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/forgot" element={<ForgotPasswordPage />} />
-              <Route path="/reset" element={<ResetPasswordPage />} />
-          </Routes>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/forgot" element={<ForgotPasswordPage />} />
+          <Route path="/reset" element={<ResetPasswordPage />} />
+          <Route element={<DefaultLayout />}>
+            <Route
+              path="/"
+              element={<ProtectedRoute isAuthenticated={true} authenticationPath="/login" outlet={<HomePage />} />}
+            />
+            <Route
+              path="/"
+              element={<ProtectedRoute isAuthenticated={true} authenticationPath="/login" outlet={<HomePage />} />}
+            />
+            <Route
+              path="/about"
+              element={<ProtectedRoute isAuthenticated={true} authenticationPath="/login" outlet={<AboutPage />} />}
+            />
+            <Route
+              path="/music"
+              element={<ProtectedRoute isAuthenticated={true} authenticationPath="/login" outlet={<MusicPage />} />}
+            />
+            <Route
+              path="/selection"
+              element={<ProtectedRoute isAuthenticated={true} authenticationPath="/login" outlet={<SelectionPage />} />}
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute isAuthenticated={true} authenticationPath="/login" outlet={<UserProfilePage />} />
+              }
+            />
+          </Route>
+        </Routes>
       </BrowserRouter>
-
-  </ChakraProvider>
-)
+    </ChakraProvider>
+  </React.StrictMode>
+);

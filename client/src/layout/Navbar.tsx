@@ -1,4 +1,3 @@
-//import { ReactNode } from 'react';
 import { Link as RouteLink } from 'react-router-dom';
 import {
   Box,
@@ -16,9 +15,13 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  Text,
+  useColorMode,
+  Text
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { FaRoute } from 'react-icons/fa';
+
 /*
 const Links = ['Home', 'Music', 'Selection'];
 
@@ -45,6 +48,7 @@ const NavLink = ({ text }: NavLinkProps) => (
 );
 
 export const Navbar = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -59,11 +63,10 @@ export const Navbar = () => {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box>Logo</Box>
-            <HStack
-              as={'nav'}
-              spacing={4}
-              display={{ base: 'none', md: 'flex' }}>
+            <Box>
+              <FaRoute />
+            </Box>
+            <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
               <RouteLink to="/">
                 <NavLink text="Home" />
               </RouteLink>
@@ -76,21 +79,11 @@ export const Navbar = () => {
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
-            <Button
-              variant={'solid'}
-              colorScheme={'teal'}
-              size={'sm'}
-              mr={4}
-              leftIcon={<AddIcon />}>
-              Action
-            </Button>
+            <br />
+            <Button onClick={toggleColorMode}>{colorMode === 'light' ? <MoonIcon /> : <SunIcon />}</Button>
+            <br />
             <Menu>
-              <MenuButton
-                as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}
-                minW={0}>
+              <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
                 <Avatar
                   size={'sm'}
                   src={
@@ -100,7 +93,7 @@ export const Navbar = () => {
               </MenuButton>
               <MenuList>
                 <MenuItem>
-                  <RouteLink to="/userprofile">
+                  <RouteLink to="/profile">
                     <NavLink text="Profile" />
                   </RouteLink>
                 </MenuItem>
@@ -108,7 +101,7 @@ export const Navbar = () => {
                 <MenuItem>
                   <RouteLink to="/signout">
                     <NavLink text="Sign out" />
-                    </RouteLink>
+                  </RouteLink>
                 </MenuItem>
               </MenuList>
             </Menu>
@@ -131,7 +124,6 @@ export const Navbar = () => {
           </Box>
         ) : null}
       </Box>
-
     </>
   );
-}
+};

@@ -1,4 +1,3 @@
-
 export const MusicPage = () => {
-    return <div>Music page</div>;
-  };
+  return <div>Music page</div>;
+};

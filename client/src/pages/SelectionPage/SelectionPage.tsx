@@ -1,4 +1,3 @@
-
 export const SelectionPage = () => {
-  return <div>Selection page</div>
-}
+  return <div>Selection page</div>;
+};

@@ -1,62 +1,66 @@
+import { Link as RouteLink } from 'react-router-dom';
 import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    Checkbox,
-    Stack,
-    Link,
-    Button,
-    Heading,
-    useColorModeValue,
-  } from '@chakra-ui/react';
-  
+  Flex,
+  Box,
+  FormControl,
+  //FormLabel,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Checkbox,
+  Stack,
+  Link,
+  Button,
+  Heading,
+  useColorModeValue
+} from '@chakra-ui/react';
+import { FaUserAlt, FaLock } from 'react-icons/fa';
+
 export const LoginPage = () => {
-    return (
-      <Flex
-        minH={'100vh'}
-        align={'center'}
-        justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-          <Stack align={'center'}>
-            <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-          </Stack>
-          <Box
-            rounded={'lg'}
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
-            p={8}>
-            <Stack spacing={4}>
-              <FormControl id="email">
-                <FormLabel>Email address</FormLabel>
-                <Input type="email" />
-              </FormControl>
-              <FormControl id="password">
-                <FormLabel>Password</FormLabel>
-                <Input type="password" />
-              </FormControl>
-              <Stack spacing={10}>
-                <Stack
-                  direction={{ base: 'column', sm: 'row' }}
-                  align={'start'}
-                  justify={'space-between'}>
-                  <Checkbox>Remember me</Checkbox>
-                  <Link color={'blue.400'}>Forgot password?</Link>
-                </Stack>
-                <Button
-                  bg={'blue.400'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }}>
-                  Sign in
-                </Button>
-              </Stack>
-            </Stack>
-          </Box>
+  return (
+    <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+        <Stack align={'center'}>
+          <Heading fontSize={'4xl'}>Welcome</Heading>
         </Stack>
-      </Flex>
-    );
-  }
+        <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
+          <Stack spacing={4}>
+            <FormControl id="email">
+              <InputGroup>
+                <InputLeftElement>
+                  <FaUserAlt pointerEvents="none" />
+                </InputLeftElement>
+                <Input type="email" placeholder="email address" />
+              </InputGroup>
+            </FormControl>
+            <FormControl id="password">
+              <InputGroup>
+                <InputLeftElement>
+                  <FaLock pointerEvents="none" />
+                </InputLeftElement>
+                <Input type="password" placeholder="password" />
+              </InputGroup>
+            </FormControl>
+            <Stack spacing={10}>
+              <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
+                <Checkbox>Remember me</Checkbox>
+                <RouteLink to="/forgot">
+                  <Link color={'blue.400'}>Forgot password?</Link>
+                </RouteLink>
+              </Stack>
+              <Button
+                bg={'blue.400'}
+                color={'white'}
+                _hover={{
+                  bg: 'blue.500'
+                }}
+              >
+                Sign in
+              </Button>
+            </Stack>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
+  );
+};
