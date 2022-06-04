@@ -1,5 +1,6 @@
 import {
   Button,
+  Box,
   Flex,
   FormControl,
   FormLabel,
@@ -31,7 +32,7 @@ export const UserProfilePage = () => {
         my={12}
       >
         <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
-          User Profile Edit
+          Edit Profile
         </Heading>
         <FormControl id="userName">
           <FormLabel>User Icon</FormLabel>
@@ -57,7 +58,7 @@ export const UserProfilePage = () => {
         <FormControl id="userName" isRequired>
           <InputGroup>
             <InputLeftElement>
-              <FaUserAlt pointerEvents="none" />
+              <Box as={FaUserAlt} pointerEvents="none" color="gray.500" />
             </InputLeftElement>
             <Input placeholder="user name" type="text" />
           </InputGroup>
@@ -65,7 +66,7 @@ export const UserProfilePage = () => {
         <FormControl id="email" isRequired>
           <InputGroup>
             <InputLeftElement>
-              <FaEnvelope pointerEvents="none" />
+            <Box as={FaEnvelope} pointerEvents="none" color="gray.500" />
             </InputLeftElement>
             <Input placeholder="your-email@example.com" type="email" />
           </InputGroup>
@@ -73,7 +74,7 @@ export const UserProfilePage = () => {
         <FormControl id="password" isRequired>
           <InputGroup>
             <InputLeftElement>
-              <FaLock pointerEvents="none" />
+            <Box as={FaLock} pointerEvents="none" color="gray.500" />
             </InputLeftElement>
             <Input placeholder="password" type="password" />
           </InputGroup>
