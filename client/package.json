@@ -8,8 +8,10 @@
   "keywords": [
     "Music",
     "Mariadb",
+    "MySQL",
     "Docker",
-    "Node.js"
+    "Node.js",
+    "Chakra-ui"
   ],
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",

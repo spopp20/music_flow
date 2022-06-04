@@ -1,4 +1,19 @@
-import { Button, FormControl, Flex, Heading, Input, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import { Link as RouteLink } from 'react-router-dom';
+import {
+  Box,
+  Button,
+  FormControl,
+  Flex,
+  Heading,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Link,
+  Stack,
+  Text,
+  useColorModeValue
+} from '@chakra-ui/react';
+import { MdEmail } from 'react-icons/md';
 
 //type ForgotPasswordFormInputs = {
 //  email: string;
@@ -18,13 +33,18 @@ export const ForgotPasswordPage = () => {
         my={12}
       >
         <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
-          Forgot your password?
+          Reset Password
         </Heading>
         <Text fontSize={{ base: 'sm', sm: 'md' }} color={useColorModeValue('gray.800', 'gray.400')}>
-          You&apos;ll get an email with a reset link
+          Request an email with a reset link
         </Text>
         <FormControl id="email">
-          <Input placeholder="your-email@example.com" _placeholder={{ color: 'gray.500' }} type="email" />
+          <InputGroup>
+            <InputLeftElement>
+              <Box as={MdEmail} pointerEvents="none" color="gray.500" />
+            </InputLeftElement>
+            <Input placeholder="your-email@example.com" type="email" />
+          </InputGroup>
         </FormControl>
         <Stack spacing={6}>
           <Button
@@ -36,6 +56,16 @@ export const ForgotPasswordPage = () => {
           >
             Request Reset
           </Button>
+        </Stack>
+        <Stack pt={6}>
+          <Text align={'center'}>
+            Ready to login?
+            <RouteLink to="/login">
+              <Link ml={2} color={'blue.400'}>
+                Login
+              </Link>
+            </RouteLink>
+          </Text>
         </Stack>
       </Stack>
     </Flex>

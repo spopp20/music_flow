@@ -1,10 +1,11 @@
+import { Link as RouteLink } from 'react-router-dom';
 import {
   Flex,
   Box,
   FormControl,
-  FormLabel,
   Input,
   InputGroup,
+  InputLeftElement,
   HStack,
   InputRightElement,
   Stack,
@@ -16,6 +17,8 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { FaUserAlt, FaLock } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
 
 export const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,36 +28,53 @@ export const SignupPage = () => {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
-            Sign up
+            Membership
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool features ✌️
+            to enjoy all of our applicatino features ✌️
           </Text>
         </Stack>
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
+            <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
+              Become a member
+            </Heading>
             <HStack>
               <Box>
                 <FormControl id="firstName" isRequired>
-                  <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                  <InputGroup>
+                    <InputLeftElement>
+                      <Box as={FaUserAlt} pointerEvents="none" color="gray.500" />
+                    </InputLeftElement>
+                    <Input type="text" placeholder="first name" />
+                  </InputGroup>
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="lastName">
-                  <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                  <InputGroup>
+                    <InputLeftElement>
+                      <Box as={FaUserAlt} pointerEvents="none" color="gray.500" />
+                    </InputLeftElement>
+                    <Input type="text" placeholder="last name" />
+                  </InputGroup>
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <InputGroup>
+                <InputLeftElement>
+                  <Box as={MdEmail} pointerEvents="none" color="gray.500" />
+                </InputLeftElement>
+                <Input type="email" placeholder="email address" />
+              </InputGroup>
             </FormControl>
             <FormControl id="password" isRequired>
-              <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                <InputLeftElement>
+                  <Box as={FaLock} pointerEvents="none" color="gray.500" />
+                </InputLeftElement>
+                <Input type={showPassword ? 'text' : 'password'} placeholder="password" />
                 <InputRightElement h={'full'}>
                   <Button variant={'ghost'} onClick={() => setShowPassword((showPassword) => !showPassword)}>
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
@@ -77,7 +97,12 @@ export const SignupPage = () => {
             </Stack>
             <Stack pt={6}>
               <Text align={'center'}>
-                Already a user? <Link color={'blue.400'}>Login</Link>
+                Already a user?
+                <RouteLink to="/login">
+                  <Link ml={2} color={'blue.400'}>
+                    Login
+                  </Link>
+                </RouteLink>
               </Text>
             </Stack>
           </Stack>

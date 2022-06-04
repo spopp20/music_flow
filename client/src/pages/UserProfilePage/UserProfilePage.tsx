@@ -59,7 +59,7 @@ export const UserProfilePage = () => {
             <InputLeftElement>
               <FaUserAlt pointerEvents="none" />
             </InputLeftElement>
-            <Input placeholder="user name" _placeholder={{ color: 'gray.500' }} type="text" />
+            <Input placeholder="user name" type="text" />
           </InputGroup>
         </FormControl>
         <FormControl id="email" isRequired>
@@ -67,7 +67,7 @@ export const UserProfilePage = () => {
             <InputLeftElement>
               <FaEnvelope pointerEvents="none" />
             </InputLeftElement>
-            <Input placeholder="your-email@example.com" _placeholder={{ color: 'gray.500' }} type="email" />
+            <Input placeholder="your-email@example.com" type="email" />
           </InputGroup>
         </FormControl>
         <FormControl id="password" isRequired>
@@ -75,7 +75,7 @@ export const UserProfilePage = () => {
             <InputLeftElement>
               <FaLock pointerEvents="none" />
             </InputLeftElement>
-            <Input placeholder="password" _placeholder={{ color: 'gray.500' }} type="password" />
+            <Input placeholder="password" type="password" />
           </InputGroup>
         </FormControl>
         <Stack spacing={6} direction={['column', 'row']}>

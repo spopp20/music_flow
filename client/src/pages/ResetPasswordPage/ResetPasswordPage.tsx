@@ -18,7 +18,7 @@ export const ResetPasswordPage = () => {
         </Heading>
         <FormControl id="email" isRequired>
           <FormLabel>Email address</FormLabel>
-          <Input placeholder="your-email@example.com" _placeholder={{ color: 'gray.500' }} type="email" />
+          <Input placeholder="your-email@example.com" type="email" />
         </FormControl>
         <FormControl id="password" isRequired>
           <FormLabel>Password</FormLabel>

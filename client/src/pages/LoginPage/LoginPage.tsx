@@ -3,7 +3,6 @@ import {
   Flex,
   Box,
   FormControl,
-  //FormLabel,
   Input,
   InputGroup,
   InputLeftElement,
@@ -14,7 +13,8 @@ import {
   Heading,
   useColorModeValue
 } from '@chakra-ui/react';
-import { FaUserAlt, FaLock } from 'react-icons/fa';
+import { FaLock } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
 
 export const LoginPage = () => {
   return (
@@ -25,10 +25,13 @@ export const LoginPage = () => {
         </Stack>
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
+            <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
+              Member Login
+            </Heading>
             <FormControl id="email">
               <InputGroup>
                 <InputLeftElement>
-                  <FaUserAlt pointerEvents="none" />
+                  <Box as={MdEmail} pointerEvents="none" color="gray.500" />
                 </InputLeftElement>
                 <Input type="email" placeholder="email address" />
               </InputGroup>
@@ -36,7 +39,7 @@ export const LoginPage = () => {
             <FormControl id="password">
               <InputGroup>
                 <InputLeftElement>
-                  <FaLock pointerEvents="none" />
+                  <Box as={FaLock} pointerEvents="none" color="gray.500" />
                 </InputLeftElement>
                 <Input type="password" placeholder="password" />
               </InputGroup>
