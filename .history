@@ -30,7 +30,7 @@ mkdir client
 cd client
 touch Dockerfile
 touch .dockerignore
-npx create-react-app music-flow
+npx create-react-app music-flow --template typescript
 cp -r music-flow/* .
 rm -rf music-flow
 # rm -rf .git  # Was not needed for some reason

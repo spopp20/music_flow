@@ -1,10 +1,15 @@
-FROM node:16
+FROM node:16-buster
 
-RUN mkdir -p /app
-WORKDIR /app
-COPY package.json /app
-COPY . /app
+# Create app directory
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
 
-RUN npm install
+# Copy both package json files
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
+
+ENV NODE_ENV development
 
 CMD ["npm", "start"]

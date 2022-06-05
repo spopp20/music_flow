@@ -29,7 +29,7 @@ Open the GraphQL interface at [http://localhost:4000](http://localhost:4000)
 
 ## Available Scripts
 
-In the server directory, you can run:
+In the server directory, if not using docker-compose; you can run the following scripts
 
 ### npm run dev
 runs the music server in development mode. Any server code change will cause the server to automatically restart and use the latest schema.
@@ -40,8 +40,8 @@ Runs the schema.ts script and Nexus to generate your schema in two files
 1. schema.graphql - generated with your servers Query objects
 2. nexus-typegen.ts - auto-generated interface and type definitions
 
-### npm run prettier
-Uses prettier to format typescript files
+### npm run format
+Use prettier to format js, JSON, typescript, and tsx files
 
 ### npm run build
 

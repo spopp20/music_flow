@@ -66,7 +66,7 @@ export const UserProfilePage = () => {
         <FormControl id="email" isRequired>
           <InputGroup>
             <InputLeftElement>
-            <Box as={FaEnvelope} pointerEvents="none" color="gray.500" />
+              <Box as={FaEnvelope} pointerEvents="none" color="gray.500" />
             </InputLeftElement>
             <Input placeholder="your-email@example.com" type="email" />
           </InputGroup>
@@ -74,7 +74,7 @@ export const UserProfilePage = () => {
         <FormControl id="password" isRequired>
           <InputGroup>
             <InputLeftElement>
-            <Box as={FaLock} pointerEvents="none" color="gray.500" />
+              <Box as={FaLock} pointerEvents="none" color="gray.500" />
             </InputLeftElement>
             <Input placeholder="password" type="password" />
           </InputGroup>

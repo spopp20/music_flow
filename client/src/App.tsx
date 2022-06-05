@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChakraProvider, theme } from '@chakra-ui/react';
+import { ChakraProvider, createLocalStorageManager, theme } from '@chakra-ui/react';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { DefaultLayout } from './layout';
@@ -14,9 +14,11 @@ import { ResetPasswordPage } from './pages';
 import { UserProfilePage } from './pages';
 import { ProtectedRoute } from './routes';
 
+const manager = createLocalStorageManager('storage-manager');
+
 export const App = () => (
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme} colorModeManager={manager}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />

@@ -1,15 +1,15 @@
-import * as React from 'react';
-import ReactDOM from 'react-dom';
+import React, { StrictMode } from 'react';
+import { render } from 'react-dom';
 import { ColorModeScript } from '@chakra-ui/react';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ColorModeScript />
+render(
+  <StrictMode>
+    <ColorModeScript storageKey="storage-manager" />
     <App />
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root')
 );
 

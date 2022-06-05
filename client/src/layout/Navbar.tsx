@@ -1,12 +1,11 @@
 import { Link as RouteLink } from 'react-router-dom';
 import {
   Box,
+  Button,
   Flex,
   Avatar,
   HStack,
-  Link,
   IconButton,
-  Button,
   Menu,
   MenuButton,
   MenuList,
@@ -21,31 +20,6 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { FaRoute } from 'react-icons/fa';
-
-/*
-const Links = ['Home', 'Music', 'Selection'];
-
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={'md'}
-    _hover={{
-      textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
-    }}
-    >
-    {children}
-  </Link>
-);
-*/
-
-type NavLinkProps = { text: string };
-const NavLink = ({ text }: NavLinkProps) => (
-  <Link>
-    <Text fontSize="xl">{text}</Text>
-  </Link>
-);
 
 export const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -68,13 +42,13 @@ export const Navbar = () => {
             </Box>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
               <RouteLink to="/">
-                <NavLink text="Home" />
+                <Text fontSize="xl">Home</Text>
               </RouteLink>
               <RouteLink to="/music">
-                <NavLink text="Music" />
+                <Text fontSize="xl">Music</Text>
               </RouteLink>
               <RouteLink to="/selection">
-                <NavLink text="Selection" />
+                <Text fontSize="xl">Selection</Text>
               </RouteLink>
             </HStack>
           </HStack>
@@ -94,13 +68,13 @@ export const Navbar = () => {
               <MenuList>
                 <MenuItem>
                   <RouteLink to="/profile">
-                    <NavLink text="Profile" />
+                    <MenuButton fontSize="xl">Profile</MenuButton>
                   </RouteLink>
                 </MenuItem>
                 <MenuDivider />
                 <MenuItem>
                   <RouteLink to="/signout">
-                    <NavLink text="Sign out" />
+                    <MenuButton fontSize="xl">Sign Out</MenuButton>
                   </RouteLink>
                 </MenuItem>
               </MenuList>
@@ -112,13 +86,13 @@ export const Navbar = () => {
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
               <RouteLink to="/">
-                <NavLink text="Home" />
+                <MenuButton fontSize="xl">Home</MenuButton>
               </RouteLink>
               <RouteLink to="/music">
-                <NavLink text="Music" />
+                <MenuButton fontSize="xl">Music</MenuButton>
               </RouteLink>
               <RouteLink to="/selection">
-                <NavLink text="Selection" />
+                <MenuButton fontSize="xl">Selection</MenuButton>
               </RouteLink>
             </Stack>
           </Box>

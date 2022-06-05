@@ -44,10 +44,6 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  AuthPayload: { // root type
-    token: string; // String!
-    user: NexusGenRootTypes['User']; // User!
-  }
   Event: { // root type
     active: boolean; // Boolean!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -68,7 +64,6 @@ export interface NexusGenObjects {
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
-  Mutation: {};
   Query: {};
   Session: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -124,10 +119,6 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
-  AuthPayload: { // field return type
-    token: string; // String!
-    user: NexusGenRootTypes['User']; // User!
-  }
   Event: { // field return type
     active: boolean; // Boolean!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -147,10 +138,6 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
-  }
-  Mutation: { // field return type
-    login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
-    signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
@@ -199,10 +186,6 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
-  AuthPayload: { // field return type name
-    token: 'String'
-    user: 'User'
-  }
   Event: { // field return type name
     active: 'Boolean'
     createdAt: 'DateTime'
@@ -222,10 +205,6 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
     updatedAt: 'DateTime'
-  }
-  Mutation: { // field return type name
-    login: 'AuthPayload'
-    signup: 'AuthPayload'
   }
   Query: { // field return type name
     ok: 'Boolean'
@@ -274,17 +253,6 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
-  Mutation: {
-    login: { // args
-      email: string; // String!
-      password: string; // String!
-    }
-    signup: { // args
-      email: string; // String!
-      name: string; // String!
-      password: string; // String!
-    }
-  }
 }
 
 export interface NexusGenAbstractTypeMembers {
