@@ -3,7 +3,10 @@
 The start of a Docker supported client server database application
 
 * Client - created with npx create-react-app (port 3000)
-* Server - using apollo-server (port 4000)
+* Server - using apollo-server and nexus (port 4000)
+** Note: I am impressed with apollo-server and with the prisma libraries
+** Note: Though I like the nexus 2.0 concept and the work that has been done
+** The nexus 2.0 library (in beta) may be replaced in the future due to some duplicated effort in the work-flow.
 
 ## Goal
 
