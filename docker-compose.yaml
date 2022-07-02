@@ -12,6 +12,7 @@ x-common-variables:
 services:
   mysql-db:
     image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     container_name: mysql_container
     environment:
       <<: *common-variables
@@ -23,7 +24,7 @@ services:
       - 3307:3306
     restart: unless-stopped
     volumes:
-      - ./db/sample.sql:/docker-entrypoint-initdb.d/sample.sql
+      - ./db:/docker-entrypoint-initdb.d
 
   mysql-seeder:
     image: mysql

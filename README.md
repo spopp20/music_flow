@@ -4,9 +4,8 @@ The start of a Docker supported client server database application
 
 * Client - created with npx create-react-app (port 3000)
 * Server - using apollo-server and nexus (port 4000)
-** Note: I am impressed with apollo-server and with the prisma libraries
-** Note: Though I like the nexus 2.0 concept and the work that has been done
-** The nexus 2.0 library (in beta) may be replaced in the future due to some duplicated effort in the work-flow.
+** Note: I am impressed with apollo-server and with the prisma libraries I may replace nexus-prisma (early preview).
+
 
 ## Goal
 
@@ -20,34 +19,65 @@ Build a React full-stack application with Node.js on the front and back-end serv
 * Docker version 20.10.12
 * docker-compose version 1.29.2
 
+## Root Folder
+The root of this project contains the docker-compose.yaml file used to create the containers that compose this application.
 
-## client folder
-Front-end application created using create-react-app
+* mysql-db - the application database
+* mysql-seeder - seeds the database with temporary data 
+* server - The application API services
+* client - The Music Flow web application
 
-## server folder
-Backend GraphQL API service
+## Run once
 
-## db folder
-Database directory with sample.sql used to initialize the database
+```
+docker-compose pull
+docker-compose build
+```
 
-## Application Startup
+### Application Startup
+
+From the Root folder run the command:
 
 ```
 docker-compose up
 ```
 
+## Docker commands
+| Command | Purpose |
+| docker ps | List running containers |
+| docker stop (conntainerId) | Stop identified container |
+
+
+## Client Folder
+Front-end application created using create-react-app
+
+## Server Folder
+Backend GraphQL API service
+
+## Db Folder
+Database directory with sample.sql used to initialize the database
+
+
+
 ## Prisma DB Schema
+
+Prisma 2.0 is a system to manage your database schema versions.
+It also generates a type safe ORM - the PrismaClient to provide access to the data.
 
 Next steps from the server folder
 
 ```
-1. Set the DATABASE_URL in the .env file to point to your existing database. If your database has no tables yet, read https://pris.ly/d/getting-started
-2. Set the provider of the datasource block in schema.prisma to match your database: postgresql, mysql, sqlite, sqlserver or mongodb.
+1. Copy the .env.example file to create a .env file
+2. Edit the DATABASE_URL in the .env file to point to your existing database. If your database has no tables yet, read https://pris.ly/d/getting-started
+3. Set the provider of the datasource block in schema.prisma to match your database: postgresql, mysql, sqlite, sqlserver or mongodb.
 
 ```
 
-### Start from an Existing Database Schema First
+
+### Start from an Existing Database Schema
 Our project started with an existing schema loaded from db/sample.sql
+
+In the server folder
 
 ```
 3. Run `npx prisma db pull` to turn your database schema into a Prisma schema.
@@ -58,8 +88,18 @@ Our project started with an existing schema loaded from db/sample.sql
 To change the Database schema or start from an edited prisma.schema file use the migrate command.
 This will generate the schema and store the changes (migration) in the database and generate the Prisma Client
 
+In the server folder (for development environments)
+
 ```
 run `npx prisma migrate dev --name "(reason for the change)"`
+```
+
+To update the db/sample.sql - schema dump
+
+```
+# from the root folder of this project
+cd db
+mysqldump -u music -p music_program > sample.db
 ```
 
 ## View Client App

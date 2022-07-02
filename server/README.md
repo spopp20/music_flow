@@ -27,14 +27,41 @@ Open the GraphQL interface at [http://localhost:4000](http://localhost:4000)
 
 
 
-## Available Scripts
+## Available scripts from the server folder
 
-In the server directory, if not using docker-compose; you can run the following scripts
+In the server directory first copy the file named .env.example to a .env file.
+Then you can run the server by running docker-compose up.
+
+In running the server outside of docker - first set an environment variable:
+DATABASE_URL with a similar value found in .env.example.
+
+Then you can run the following scripts.
 
 ### npm run dev
 runs the music server in development mode. Any server code change will cause the server to automatically restart and use the latest schema.
 
-### npm run generate
+
+## Prisma
+
+### Use Prisma to pull down an existing database schema
+
+Note that many-to-many relations will not be detected unless tables are named a specific way.
+See prisma documentation.
+
+```
+npx prisma db pull
+```
+
+### Validate a prisma schema
+
+```
+cd server/prisma
+
+npx prisma validate
+```
+
+
+### npm run generate (from the server folder)
 Runs the schema.ts script and Nexus to generate your schema in two files
 
 1. schema.graphql - generated with your servers Query objects
@@ -43,7 +70,7 @@ Runs the schema.ts script and Nexus to generate your schema in two files
 ### npm run format
 Use prettier to format js, JSON, typescript, and tsx files
 
-### npm run build
+### npm run build (from the server folder)
 
 1. operates prisma generate (See npm run generate)
 2. generates schema.graphql
@@ -51,6 +78,7 @@ Use prettier to format js, JSON, typescript, and tsx files
 
 ### npm run start
 Starts a non-debug music service GraphQL server
+If not using docker-compose from the root folder, then set your DATABASE_URL environment variable first.
 
 ## Documentation
 

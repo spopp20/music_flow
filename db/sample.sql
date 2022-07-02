@@ -56,18 +56,16 @@ DROP TABLE IF EXISTS `EventSong`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `EventSong` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `eventId` int(11) DEFAULT NULL,
-  `songId` int(11) DEFAULT NULL,
+  `eventId` int(11) NOT NULL,
+  `songId` int(11) NOT NULL,
   `published` int(11) NOT NULL DEFAULT 0,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`eventId`,`songId`),
   KEY `eventId` (`eventId`),
   KEY `songId` (`songId`),
-  CONSTRAINT `EventSong_ibfk_1` FOREIGN KEY (`eventId`) REFERENCES `Event` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `EventSong_ibfk_2` FOREIGN KEY (`songId`) REFERENCES `Song` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `EventSong_ibfk_1` FOREIGN KEY (`eventId`) REFERENCES `Event` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `EventSong_ibfk_2` FOREIGN KEY (`songId`) REFERENCES `Song` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -115,20 +113,19 @@ DROP TABLE IF EXISTS `InstrumentSong`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `InstrumentSong` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `notes` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `words` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mimeType` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `file` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp(),
-  `instrumentId` int(11) DEFAULT NULL,
-  `songId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  `instrumentId` int(11) NOT NULL,
+  `songId` int(11) NOT NULL,
+  PRIMARY KEY (`instrumentId`,`songId`),
   KEY `instrumentId` (`instrumentId`),
   KEY `songId` (`songId`),
-  CONSTRAINT `InstrumentSong_ibfk_1` FOREIGN KEY (`instrumentId`) REFERENCES `Instrument` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `InstrumentSong_ibfk_2` FOREIGN KEY (`songId`) REFERENCES `Song` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `InstrumentSong_ibfk_1` FOREIGN KEY (`instrumentId`) REFERENCES `Instrument` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `InstrumentSong_ibfk_2` FOREIGN KEY (`songId`) REFERENCES `Song` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -184,11 +181,11 @@ CREATE TABLE `Session` (
   `antiCSRFToken` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `publicData` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `privateData` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `userId` int(11) DEFAULT NULL,
+  `userId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Session.handle_unique` (`handle`),
   KEY `userId` (`userId`),
-  CONSTRAINT `Session_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `Session_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -277,8 +274,8 @@ CREATE TABLE `User` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` tinyint(4) DEFAULT 1,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT 1,
   `role` enum('USER','EDITOR','LEADER','ADMIN') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'USER',
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
@@ -322,7 +319,7 @@ CREATE TABLE `_prisma_migrations` (
 
 LOCK TABLES `_prisma_migrations` WRITE;
 /*!40000 ALTER TABLE `_prisma_migrations` DISABLE KEYS */;
-INSERT INTO `_prisma_migrations` VALUES ('0efeadb5-cb39-4202-af64-cb5ec3e786e2','1cd58f00cfdc2fbd9bf90bdd9a66c5b27803198f9f6d064df7f38351525a6510','2022-05-03 04:40:49.185','20220503044049_active_change_to_tinyint',NULL,NULL,'2022-05-03 04:40:49.133',1),('2662a151-5045-419b-8b36-3caad260740a','a6ba7c0390d1a6e0f82600d0c9f656257031fb137efffe4f5482a113240eefb0','2022-05-03 04:16:54.405','20220503041654_updates_to_user',NULL,NULL,'2022-05-03 04:16:54.201',1);
+INSERT INTO `_prisma_migrations` VALUES ('0efeadb5-cb39-4202-af64-cb5ec3e786e2','1cd58f00cfdc2fbd9bf90bdd9a66c5b27803198f9f6d064df7f38351525a6510','2022-05-03 04:40:49.185','20220503044049_active_change_to_tinyint',NULL,NULL,'2022-05-03 04:40:49.133',1),('2662a151-5045-419b-8b36-3caad260740a','a6ba7c0390d1a6e0f82600d0c9f656257031fb137efffe4f5482a113240eefb0','2022-05-03 04:16:54.405','20220503041654_updates_to_user',NULL,NULL,'2022-05-03 04:16:54.201',1),('27a69043-50b9-40f3-9b02-70d24b39e080','2fd12c8c323ca25d47ed62bb8d5dfbf776cc78e1ddea768c2e8be255846c293b','2022-07-02 16:18:16.755','20220702161816_validated_the_schema',NULL,NULL,'2022-07-02 16:18:16.740',1),('96f36cf1-eee9-40cd-909b-1bb42a1208e1','f53bb2b51237de722c9a69ed445e0b2ad5cce8951dacdb9cca70584d1bb27953','2022-07-02 15:38:58.121','20220702153857_added_profille_table_and_improved_relations',NULL,NULL,'2022-07-02 15:38:57.950',1);
 /*!40000 ALTER TABLE `_prisma_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -335,4 +332,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-03  0:41:51
+-- Dump completed on 2022-07-02 12:21:56
