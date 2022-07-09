@@ -20,10 +20,10 @@ model Event {
   location      String?     @db.Text
   notes         String?     @db.Text
   telephone     String?     @db.Text
-  startDateTime DateTime    @default(now()) @db.Timestamp(0)
-  endDateTime   DateTime    @default(now()) @db.Timestamp(0)
-  updatedAt     DateTime    @default(now()) @db.Timestamp(0)
+  startDateTime DateTime?   @db.Timestamp(0)
+  endDateTime   DateTime?   @db.Timestamp(0)
   createdAt     DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime    @updatedAt
   songs         EventSong[]
 }
 
@@ -32,7 +32,7 @@ model EventSong {
   songId    Int
   published Int      @default(0)
   createdAt DateTime @default(now()) @db.Timestamp(0)
-  updatedAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @updatedAt
   event     Event    @relation(fields: [eventId], references: [id], map: "EventSong_ibfk_1")
   song      Song     @relation(fields: [songId], references: [id], map: "EventSong_ibfk_2")
 
@@ -47,7 +47,7 @@ model Instrument {
   active      Int?             @default(1) @db.TinyInt
   description String?          @db.Text
   createdAt   DateTime         @default(now()) @db.Timestamp(0)
-  updatedAt   DateTime         @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime         @updatedAt
   songs       InstrumentSong[]
 }
 
@@ -57,7 +57,7 @@ model InstrumentSong {
   mimeType     String?    @db.VarChar(128)
   file         String?    @db.Text
   createdAt    DateTime   @default(now()) @db.Timestamp(0)
-  updatedAt    DateTime   @default(now()) @db.Timestamp(0)
+  updatedAt    DateTime   @updatedAt
   instrumentId Int
   songId       Int
   instruments  Instrument @relation(fields: [instrumentId], references: [id], map: "InstrumentSong_ibfk_1")
@@ -71,7 +71,7 @@ model InstrumentSong {
 model Session {
   id                 Int       @id @default(autoincrement())
   createdAt          DateTime  @default(now()) @db.Timestamp(0)
-  updatedAt          DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt          DateTime  @updatedAt
   expiresAt          DateTime?
   handle             String    @unique(map: "Session.handle_unique")
   hashedSessionToken String?
@@ -94,7 +94,7 @@ model Song {
   startWords  String?          @db.Text
   arrangement String?          @db.Text
   createdAt   DateTime         @default(now()) @db.Timestamp(0)
-  updatedAt   DateTime         @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime         @updatedAt
   tags        String?
   events      EventSong[]
   instruments InstrumentSong[]
@@ -103,7 +103,7 @@ model Song {
 model Token {
   id          Int        @id @default(autoincrement())
   createdAt   DateTime   @default(now()) @db.Timestamp(0)
-  updatedAt   DateTime   @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime   @updatedAt
   hashedToken String
   type        Token_type
   expiresAt   DateTime
@@ -118,7 +118,7 @@ model Token {
 model User {
   id        Int       @id @default(autoincrement())
   createdAt DateTime  @default(now()) @db.Timestamp(0)
-  updatedAt DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt DateTime  @updatedAt
   email     String    @unique(map: "User.email_unique")
   name      String
   active    Int       @default(1) @db.TinyInt
@@ -127,13 +127,14 @@ model User {
   profile   Profile?
   sessions  Session[]
   tokens    Token[]
-
   @@unique([email, active], map: "User.email_active_unique")
 }
 
 model Profile {
   id     Int    @id @default(autoincrement())
   bio    String
+  createdAt DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt DateTime  @updatedAt
   userId Int    @unique
   user   User   @relation(fields: [userId], references: [id])
 }
