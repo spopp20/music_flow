@@ -60,28 +60,30 @@ cd server/prisma
 npx prisma validate
 ```
 
+### After editing prisma schema.prisma
+Modify your database according to the schema.prisma file by executing
+
+```
+cd prisma
+npx prisma migrate dev --name "reason for the change"
+```
+
+Runs prisma generate - to generate the PrismaClient in your node_modules folder
+Also runs typescript-graphql to generate GraphQL Objects
 
 ### npm run generate (from the server folder)
-Runs the schema.ts script and Nexus to generate your schema in two files
-
-1. schema.graphql - generated with your servers Query objects
-2. nexus-typegen.ts - auto-generated interface and type definitions
+Runs prisma generate - to generate the PrismaClient in your node_modules folder
+Also runs typescript-graphql to generate GraphQL Objects
 
 ### npm run format
 Use prettier to format js, JSON, typescript, and tsx files
 
-### npm run build (from the server folder)
-
-1. operates prisma generate (See npm run generate)
-2. generates schema.graphql
-3. generates nexus-typegen.ts
-
-### npm run start
+### npm run start or npm run dev
 Starts a non-debug music service GraphQL server
 If not using docker-compose from the root folder, then set your DATABASE_URL environment variable first.
 
 ## Documentation
 
-* [Nexus Documentation](https://nexusjs.org/docs/)
 * [Apollo Server Documentation](https://www.apollographql.com/docs/apollo-server/)
 * [Prisma](https://www.prisma.io/)
+* [TypeGraphQL](https://typegraphql.com/)

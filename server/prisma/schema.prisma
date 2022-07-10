@@ -1,50 +1,47 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
-generator nexusPrisma {
-  provider = "nexus-prisma"
-}
-
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../prisma/generated/type-graphql"
+}
+
 model Event {
   id            Int         @id @default(autoincrement())
-  name          String      @default("") @db.VarChar(128)
-  active        Int?        @default(1) @db.TinyInt
+  name          String      @db.VarChar(128)
+  active        Int         @db.TinyInt
   description   String?     @db.Text
   venue         String?     @db.Text
   location      String?     @db.Text
   notes         String?     @db.Text
   telephone     String?     @db.Text
   startDateTime DateTime?   @db.Timestamp(0)
-  endDateTime   DateTime?   @db.Timestamp(0)
   createdAt     DateTime    @default(now()) @db.Timestamp(0)
   updatedAt     DateTime    @updatedAt
   songs         EventSong[]
 }
 
 model EventSong {
-  eventId   Int
-  songId    Int
-  published Int      @default(0)
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @db.Timestamp(0)
-  updatedAt DateTime @updatedAt
-  event     Event    @relation(fields: [eventId], references: [id], map: "EventSong_ibfk_1")
-  song      Song     @relation(fields: [songId], references: [id], map: "EventSong_ibfk_2")
-
-  @@id([eventId, songId])
+  event     Event?    @relation(fields: [eventId], references: [id], map: "EventSong_ibfk_1")
+  eventId   Int?
+  song      Song?     @relation(fields: [songId], references: [id], map: "EventSong_ibfk_2")
+  songId    Int?
   @@index([eventId], map: "eventId")
   @@index([songId], map: "songId")
 }
 
 model Instrument {
   id          Int              @id @default(autoincrement())
-  name        String           @default("") @db.VarChar(128)
-  active      Int?             @default(1) @db.TinyInt
+  name        String           @db.VarChar(128)
+  active      Int              @db.TinyInt
   description String?          @db.Text
   createdAt   DateTime         @default(now()) @db.Timestamp(0)
   updatedAt   DateTime         @updatedAt
@@ -52,18 +49,17 @@ model Instrument {
 }
 
 model InstrumentSong {
+  id           Int        @id @default(autoincrement())
   notes        String?    @db.VarChar(128)
   words        String?    @db.Text
   mimeType     String?    @db.VarChar(128)
   file         String?    @db.Text
   createdAt    DateTime   @default(now()) @db.Timestamp(0)
   updatedAt    DateTime   @updatedAt
-  instrumentId Int
-  songId       Int
-  instruments  Instrument @relation(fields: [instrumentId], references: [id], map: "InstrumentSong_ibfk_1")
-  songs        Song       @relation(fields: [songId], references: [id], map: "InstrumentSong_ibfk_2")
-
-  @@id([instrumentId, songId])
+  instruments  Instrument? @relation(fields: [instrumentId], references: [id], map: "InstrumentSong_ibfk_1")
+  instrumentId Int?
+  songs        Song?       @relation(fields: [songId], references: [id], map: "InstrumentSong_ibfk_2")
+  songId       Int?
   @@index([instrumentId], map: "instrumentId")
   @@index([songId], map: "songId")
 }
@@ -78,26 +74,40 @@ model Session {
   antiCSRFToken      String?
   publicData         String?
   privateData        String?
-  userId             Int
-  user               User      @relation(fields: [userId], references: [id], map: "Session_ibfk_1")
-
+  user               User?      @relation(fields: [userId], references: [id], map: "Session_ibfk_1")
+  userId             Int?
   @@index([userId], map: "userId")
 }
 
 model Song {
   id          Int              @id @default(autoincrement())
-  title       String           @default("") @db.VarChar(128)
-  active      Int?             @default(1) @db.TinyInt
+  title       String           @db.VarChar(128)
+  active      Int              @db.TinyInt
   alias       String?          @db.VarChar(128)
   startKey    String?          @db.VarChar(15)
-  tempoCd     Int?             @db.TinyInt
+  tempoCd     Int              @db.TinyInt
   startWords  String?          @db.Text
   arrangement String?          @db.Text
   createdAt   DateTime         @default(now()) @db.Timestamp(0)
   updatedAt   DateTime         @updatedAt
-  tags        String?
+  tags        SongTags[]
   events      EventSong[]
   instruments InstrumentSong[]
+}
+
+model SongTags {
+  id    Int          @id @default(autoincrement())
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  song   Song?       @relation(fields: [songId], references: [id])
+  songId Int?
+  tag    Tag?        @relation(fields: [tagId], references: [id])
+  tagId  Int?
+}
+
+model Tag {
+  id    Int        @id @default(autoincrement())
+  name  String     @unique
+  songs SongTags[]
 }
 
 model Token {
@@ -108,9 +118,8 @@ model Token {
   type        Token_type
   expiresAt   DateTime
   sentTo      String
-  userId      Int
-  user        User       @relation(fields: [userId], references: [id], onDelete: NoAction, map: "Token_ibfk_1")
-
+  user        User?       @relation(fields: [userId], references: [id], onDelete: NoAction, map: "Token_ibfk_1")
+  userId      Int?
   @@unique([hashedToken, type], map: "Token.hashedToken_type_unique")
   @@index([userId], map: "userId")
 }
@@ -121,7 +130,7 @@ model User {
   updatedAt DateTime  @updatedAt
   email     String    @unique(map: "User.email_unique")
   name      String
-  active    Int       @default(1) @db.TinyInt
+  active    Int       @db.TinyInt
   role      User_role @default(USER)
   password  String
   profile   Profile?
@@ -131,12 +140,12 @@ model User {
 }
 
 model Profile {
-  id     Int    @id @default(autoincrement())
-  bio    String
+  id        Int       @id @default(autoincrement())
+  bio       String
   createdAt DateTime  @default(now()) @db.Timestamp(0)
   updatedAt DateTime  @updatedAt
-  userId Int    @unique
-  user   User   @relation(fields: [userId], references: [id])
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    Int?      @unique
 }
 
 enum Token_type {

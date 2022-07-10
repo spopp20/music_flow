@@ -1,0 +1,12 @@
+export { AggregateSongTagsArgs } from "./AggregateSongTagsArgs";
+export { CreateManySongTagsArgs } from "./CreateManySongTagsArgs";
+export { CreateOneSongTagsArgs } from "./CreateOneSongTagsArgs";
+export { DeleteManySongTagsArgs } from "./DeleteManySongTagsArgs";
+export { DeleteOneSongTagsArgs } from "./DeleteOneSongTagsArgs";
+export { FindFirstSongTagsArgs } from "./FindFirstSongTagsArgs";
+export { FindManySongTagsArgs } from "./FindManySongTagsArgs";
+export { FindUniqueSongTagsArgs } from "./FindUniqueSongTagsArgs";
+export { GroupBySongTagsArgs } from "./GroupBySongTagsArgs";
+export { UpdateManySongTagsArgs } from "./UpdateManySongTagsArgs";
+export { UpdateOneSongTagsArgs } from "./UpdateOneSongTagsArgs";
+export { UpsertOneSongTagsArgs } from "./UpsertOneSongTagsArgs";
