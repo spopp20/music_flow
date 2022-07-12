@@ -1,0 +1,12 @@
+export { AggregateInstrumentSongArgs } from "./AggregateInstrumentSongArgs";
+export { CreateManyInstrumentSongArgs } from "./CreateManyInstrumentSongArgs";
+export { CreateOneInstrumentSongArgs } from "./CreateOneInstrumentSongArgs";
+export { DeleteManyInstrumentSongArgs } from "./DeleteManyInstrumentSongArgs";
+export { DeleteOneInstrumentSongArgs } from "./DeleteOneInstrumentSongArgs";
+export { FindFirstInstrumentSongArgs } from "./FindFirstInstrumentSongArgs";
+export { FindManyInstrumentSongArgs } from "./FindManyInstrumentSongArgs";
+export { FindUniqueInstrumentSongArgs } from "./FindUniqueInstrumentSongArgs";
+export { GroupByInstrumentSongArgs } from "./GroupByInstrumentSongArgs";
+export { UpdateManyInstrumentSongArgs } from "./UpdateManyInstrumentSongArgs";
+export { UpdateOneInstrumentSongArgs } from "./UpdateOneInstrumentSongArgs";
+export { UpsertOneInstrumentSongArgs } from "./UpsertOneInstrumentSongArgs";

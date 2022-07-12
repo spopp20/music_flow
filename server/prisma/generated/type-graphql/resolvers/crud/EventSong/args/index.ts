@@ -1,0 +1,12 @@
+export { AggregateEventSongArgs } from "./AggregateEventSongArgs";
+export { CreateManyEventSongArgs } from "./CreateManyEventSongArgs";
+export { CreateOneEventSongArgs } from "./CreateOneEventSongArgs";
+export { DeleteManyEventSongArgs } from "./DeleteManyEventSongArgs";
+export { DeleteOneEventSongArgs } from "./DeleteOneEventSongArgs";
+export { FindFirstEventSongArgs } from "./FindFirstEventSongArgs";
+export { FindManyEventSongArgs } from "./FindManyEventSongArgs";
+export { FindUniqueEventSongArgs } from "./FindUniqueEventSongArgs";
+export { GroupByEventSongArgs } from "./GroupByEventSongArgs";
+export { UpdateManyEventSongArgs } from "./UpdateManyEventSongArgs";
+export { UpdateOneEventSongArgs } from "./UpdateOneEventSongArgs";
+export { UpsertOneEventSongArgs } from "./UpsertOneEventSongArgs";

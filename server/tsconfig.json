@@ -1,15 +1,16 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Node 16",
-
   "compilerOptions": {
-    "lib": ["es2021"],
+    "target": "es2018",
     "module": "commonjs",
-    "target": "es2021",
-    "outDir": "build",
-    "strict": true,
+    "lib": [
+      "es2018",
+      "esnext.asynciterable"
+    ],
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }
