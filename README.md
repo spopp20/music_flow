@@ -3,8 +3,11 @@
 The start of a Docker supported client server database application
 
 * Client - created with npx create-react-app (port 3000)
-* Server - using apollo-server and nexus (port 4000)
-** Note: I am impressed with apollo-server and with the prisma libraries I may replace nexus-prisma (early preview).
+* Server - using apollo-server (port 4000)
+* Note: Apollo server works great with the prisma libraries 
+* I tried nexus-prisma (early preview) but it is not production ready yet
+* I replaced nexus with typegraphql-prisma
+* I will remove the generated code after updating the README.md
 
 
 ## Goal
@@ -129,7 +132,6 @@ Open http://localhost:5555
 ## Prisma Commands
 
             init   Setup Prisma for your app
-      introspect   Get the datamodel of your database
         generate   Generate artifacts (e.g. Prisma Client)
           studio   Open Prisma Studio
           format   Format your schema
@@ -158,3 +160,5 @@ Open http://localhost:5555
   Push the Prisma schema state to the database
   $ npx prisma db push
 ```
+
+After any change to the database/prisma schema rebuild your docker containers.
