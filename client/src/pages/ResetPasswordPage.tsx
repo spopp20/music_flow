@@ -1,6 +1,6 @@
 import { Button, Flex, FormControl, FormLabel, Heading, Input, Stack, useColorModeValue } from '@chakra-ui/react';
 
-export const ResetPasswordPage = () => {
+const ResetPasswordPage = () => {
   return (
     <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack
@@ -39,3 +39,5 @@ export const ResetPasswordPage = () => {
     </Flex>
   );
 };
+
+export default ResetPasswordPage;

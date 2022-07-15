@@ -16,7 +16,7 @@ import {
 import { FaLock } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
@@ -67,3 +67,5 @@ export const LoginPage = () => {
     </Flex>
   );
 };
+
+export default LoginPage;

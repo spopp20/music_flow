@@ -6,10 +6,12 @@ export type ProtectedRouteProps = {
   outlet: JSX.Element;
 };
 
-export const ProtectedRoute = ({ isAuthenticated, authenticationPath, outlet }: ProtectedRouteProps): JSX.Element => {
+const ProtectedRoute = ({ isAuthenticated, authenticationPath, outlet }: ProtectedRouteProps): JSX.Element => {
   if (isAuthenticated) {
     return outlet;
   } else {
     return <Navigate to={{ pathname: authenticationPath }} />;
   }
 };
+
+export default ProtectedRoute;

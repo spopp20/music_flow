@@ -20,7 +20,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
-export const SignupPage = () => {
+const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -111,3 +111,5 @@ export const SignupPage = () => {
     </Flex>
   );
 };
+
+export default SignupPage;

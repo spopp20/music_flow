@@ -19,7 +19,7 @@ import { MdEmail } from 'react-icons/md';
 //  email: string;
 //};
 
-export const ForgotPasswordPage = () => {
+const ForgotPasswordPage = () => {
   return (
     <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack
@@ -71,3 +71,5 @@ export const ForgotPasswordPage = () => {
     </Flex>
   );
 };
+
+export default ForgotPasswordPage;

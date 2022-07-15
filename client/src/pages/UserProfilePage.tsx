@@ -18,7 +18,7 @@ import {
 import { SmallCloseIcon } from '@chakra-ui/icons';
 import { FaUserAlt, FaEnvelope, FaLock } from 'react-icons/fa';
 
-export const UserProfilePage = () => {
+const UserProfilePage = () => {
   return (
     <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack
@@ -105,3 +105,5 @@ export const UserProfilePage = () => {
     </Flex>
   );
 };
+
+export default UserProfilePage;

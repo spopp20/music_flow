@@ -1,22 +1,23 @@
 import * as React from 'react';
 import { ChakraProvider, createLocalStorageManager, theme } from '@chakra-ui/react';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import { DefaultLayout } from './layout';
-import { HomePage } from './pages';
-import { AboutPage } from './pages';
-import { MusicPage } from './pages';
-import { SelectionPage } from './pages';
-import { LoginPage } from './pages';
-import { SignupPage } from './pages';
-import { ForgotPasswordPage } from './pages';
-import { ResetPasswordPage } from './pages';
-import { UserProfilePage } from './pages';
-import { ProtectedRoute } from './routes';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import MusicPage from './pages/MusicPage';
+import SelectionPage from './pages/SelectionPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
+import UserProfilePage from './pages/UserProfilePage';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 const manager = createLocalStorageManager('storage-manager');
 
-export const App = () => (
+const App = () => {
+  return (
   <React.StrictMode>
     <ChakraProvider theme={theme} colorModeManager={manager}>
       <BrowserRouter>
@@ -57,4 +58,6 @@ export const App = () => (
       </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>
-);
+)};
+
+export default App;
